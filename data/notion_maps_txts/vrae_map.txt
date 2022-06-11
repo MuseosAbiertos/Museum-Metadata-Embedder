@@ -1,0 +1,59 @@
+| Admin Cataloguer                | IPTC:Writer-Editor                    |
+| Admin Collection                | xmp-dc:Publisher                      |
+| Admin Job ID                    | xmp-photoshop:TransmissionReference   |
+| Image Agent                     | xmp:Creator                           |
+| Image Date                      | IPTC:DateCreated                      |
+| Image Description               | xmp-vrae:ImageDescription             |
+| Image ID                        | xmp-vrae:ImageRefid                   |
+| Image Inscription               | xmp-vrae:ImageInscription             |
+| Image Location                  | xmp-vrae:ImageLocation                |
+| Image Metadata Date             | xmp-vrae:ImageMetadataDate            |
+| Image Metadata Source           | xmp-vrae:ImageMetadataSource          |
+| Image Relation                  | xmp-vrae:ImageRelation                |
+| Image Rights                    | xmp-dc:Rights                         |
+| Image Source                    | xmp-vrae:ImageSource                  |
+| Image Subject                   | xmp-vrae:ImageSubject                 |
+| Image Title                     | xmp-vrae:ImageTitle                   |
+| Image URL                       | xmp-vrae:ImageHref                    |
+| Work Agent                      | xmp-vrae:WorkAgent                    |
+| Work Cultural Context           | xmp-vrae:WorkCulturalContext          |
+| Work Date                       | xmp-vrae:WorkDate                     |
+| Work Description                | xmp-vrae:WorkDescription              |
+| Work Href                       | xmp-vrae:WorkHref                     |
+| Work ID                         | xmp-vrae:WorkRefid                    |
+| Work Inscription                | xmp-vrae:WorkInscription              |
+| Work Location                   | xmp-vrae:WorkLocation                 |
+| Work Location Creation          | xmp-vrae:WorkLocationCreation         |
+| Work Location Discovery         | xmp-vrae:WorkLocationDiscovery        |
+| Work Location Exhibition        | xmp-vrae:WorkLocationExhibition       |
+| Work Location Former Owner      | xmp-vrae:WorkLocationFormerOwner      |
+| Work Location Former Repository | xmp-vrae:WorkLocationFormerRepository |
+| Work Location Former Site       | xmp-vrae:WorkLocationFormerSite       |
+| Work Location Installation      | xmp-vrae:WorkLocationInstallation     |
+| Work Location Intended          | xmp-vrae:WorkLocationIntended         |
+| Work Location Notes             | xmp-vrae:WorkLocationNotes            |
+| Work Location Other             | xmp-vrae:WorkLocationOther            |
+| Work Location Owner             | xmp-vrae:WorkLocationOwner            |
+| Work Location Performance       | xmp-vrae:WorkLocationPerformance      |
+| Work Location Publication       | xmp-vrae:WorkLocationPublication      |
+| Work Location Repository        | xmp-vrae:WorkLocationRepository       |
+| Work Location Site              | xmp-vrae:WorkLocationSite             |
+| GPSLatitude                     | gpslatitude                           |
+| GPSLongitude                    | gpslongitude                          |
+| Work Material                   | xmp-vrae:WorkMaterial                 |
+| Work rements                    | xmp-vrae:Workrements                  |
+| Work Metadata Date              | xmp-vrae:WorkMetadataDate             |
+| Work Metadata Href              | xmp-vrae:WorkMetadataHref             |
+| Work Metadata Id                | xmp-vrae:WorkMetadataId               |
+| Work Metadata Source            | xmp-vrae:WorkMetadataSource           |
+| Work Relation                   | xmp-vrae:WorkRelation                 |
+| Work Rights                     | xmp-vrae:WorkRights                   |
+| Work Source                     | xmp-vrae:WorkSource                   |
+| Work State Edition              | xmp-vrae:WorkStateEdition             |
+| Work Style Period               | xmp-vrae:WorkStylePeriod              |
+| Work Subject                    | xmp-vrae:WorkSubject                  |
+| Work Technique                  | xmp-vrae:WorkTechnique                |
+| Work Text Reference             | xmp-vrae:WorkTextref                  |
+| Work Title                      | xmp-vrae:WorkTitle                    |
+| Work Type                       | xmp-vrae:WorkWorktype                 |
+| Image WorkType                  | xmp-vrae:ImageWorktype                |

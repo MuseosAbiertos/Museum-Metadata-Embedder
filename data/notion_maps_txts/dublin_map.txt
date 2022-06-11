@@ -1,0 +1,15 @@
+| Title            | dc:title       |
+| Creator          | dc:creator     |
+| Subject          | dc:subject     |
+| Description      | dc:description |
+| Publisher        | dc:publisher   |
+| Contributor      | dc:contributor |
+| Coverage         | dc:coverage    |
+| Date             | dc:date        |
+| Type             | dc:type        |
+| Format           | dc:format      |
+| Copyright Notice | dc:rights      |
+| Source           | dc:source      |
+| Language         | dc:language    |
+| Relation         | dc:relation    |
+| Identifier       | dc:identifier  |
