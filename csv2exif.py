@@ -12,6 +12,15 @@ Usage:
 A JSON map is used to map Screen Name - Tag Name, for each of the standards. The file must be within the data/
 directory, in a JSON file called: maps.json. The structure is as follows:
 
+Use exiftool to write exif data on jpgs according to an input CSV and a set of mapping rules according to naming
+standards: VRAE/ISADG/DC
+
+Usage:
+    python csv2exif.py CSV_PATH IMAGES_ROOT_PATH
+
+A JSON map is used to map Screen Name - Tag Name, for each of the standards. The file must be within the data/
+directory, in a JSON file called: maps.json. The structure is as follows:
+
 {'vrae':
     {
         Screen Name: Tag Name,
@@ -31,9 +40,6 @@ directory, in a JSON file called: maps.json. The structure is as follows:
 
 - Rows in the CSV must have a column called "File Name"
 - vrae.config and isadg.config must be in exiftool_configs/ directory inside the data/ directory.
-
-License
-This is free software; you can redistribute it and/or modify it under GNU General Public License v3.0
 
 """
 import os
@@ -302,7 +308,7 @@ parser = argparse.ArgumentParser(prog="csv2exif", description="Use exiftool to w
                                                               "to naming standards: VRAE/ISADG/DC")
 parser.add_argument('CSV_PATH', nargs=1, type=str, help='path for the CSV file to process.')
 parser.add_argument('JPGS_PATH', nargs=1, type=str, help='root path for the JPG files.')
-parser.add_argument('--row-progress-notify', '-r', nargs=1, type=int, help='how many rows between progress '
+parser.add_argument('--row-progress-notify', '-r', type=int, help='how many rows between progress '
                                                                            'notifications. 100 by default', default=100)
 parser.add_argument('--notify-broken-keys', '-n', type=bool, default=False,
                     help='Notify on broken/missing keys in the CSV. False by default.')
