@@ -1,6 +1,7 @@
 """
 version 0.2
 date 2022-06-10
+Martin Gersbach [mg@museosabiertos.org]
 
 Use exiftool (by Phil Harvey) to write EXIF metadata on jpgs according to an input CSV and a set of mapping rules according to naming
 standards: VRAE/ISADG/DC
