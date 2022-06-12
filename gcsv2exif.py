@@ -1,9 +1,10 @@
 """
-version 0.2
+version 0.3
 date 2022-06-10
 Martin Gersbach [mg@museosabiertos.org]
 
-Use exiftool (by Phil Harvey) to write EXIF metadata on jpgs according to an input CSV and a set of mapping rules according to naming
+----------
+Use ExifTool, by Phil Harvey to write EXIF metadata on jpgs according to an input CSV and a set of mapping rules according to naming
 standards: VRAE/ISADG/DC
 
 Usage:
@@ -31,9 +32,18 @@ directory, in a JSON file called: maps.json. The structure is as follows:
 
 - Rows in the CSV must have a column called "File Name"
 - vrae.config and isadg.config must be in exiftool_configs/ directory inside the data/ directory.
+----------
 
-License
-This is free software; you can redistribute it and/or modify it under GNU General Public License v3.0
+ExifTool [https://exiftool.org/]
+THIS script [https://github.com/MuseosAbiertos/csv2exif/]
+
+LICENCE
+  This is free software; you can redistribute it and/or modify it under GNU General Public License v3.0
+
+VERSIONS
+v0.1 First code
+v0.2 Any corrections, help, howtos
+v0.3 GUI version (Thanks to @hvdwolf)
 
 """
 import os
