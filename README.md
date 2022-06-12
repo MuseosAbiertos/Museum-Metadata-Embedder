@@ -12,17 +12,29 @@ positional arguments:
 CSV_PATH path for the CSV file to process.
 JPGS_PATH root path for the JPG files.
 
-options:
--h, --help show this help message and exit
+options:  
+-h, --help show this help message and exit  
+  
+--row-progress-notify ROW_PROGRESS_NOTIFY, -r ROW_PROGRESS_NOTIFY  
+how many rows between progress notifications. 100 by default  
+  
+--notify-broken-keys NOTIFY_BROKEN_KEYS, -n NOTIFY_BROKEN_KEYS  
+Notify on broken/missing keys in the CSV. False by default.  
+  
+--max-depth MAX_DEPTH, -m MAX_DEPTH  
+Max depth of sub-folders to look into when looking for JPGS. 3 by default  
+  
+A JSON map is used to map Screen Name - Tag Name, for each of the standards. The file must be within the data/  
+directory, in a JSON file called: maps.json. The structure is as follows:  
+*to be done*  
 
---row-progress-notify ROW_PROGRESS_NOTIFY, -r ROW_PROGRESS_NOTIFY
-how many rows between progress notifications. 100 by default
+# gcsv2exif
 
---notify-broken-keys NOTIFY_BROKEN_KEYS, -n NOTIFY_BROKEN_KEYS
-Notify on broken/missing keys in the CSV. False by default.
+'gcsv2exif' is the graphical version of csv2exif.py. It is a python3 (only) script. It does not accept arguments.  
+Usage:  
+    python3 gcsv2exif.py &
 
---max-depth MAX_DEPTH, -m MAX_DEPTH
-Max depth of sub-folders to look into when looking for JPGS. 3 by default
+# requirements
+run on the command prompt  
+    python3 -m pip install -r requirements.txt
 
-A JSON map is used to map Screen Name - Tag Name, for each of the standards. The file must be within the data/
-directory, in a JSON file called: maps.json. The structure is as follows:
