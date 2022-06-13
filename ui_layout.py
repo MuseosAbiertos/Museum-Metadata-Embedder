@@ -5,9 +5,10 @@ import PySimpleGUI as sg
 def create_and_show_gui():
     folderfileframelayout = [
         [sg.Text('Specify the path for the CSV file to process.')],
-        [sg.Input('', key='-CSVFILE-', size=(100, 1)), sg.FileBrowse()],
+        [sg.Input('', key='-CSVFILE-', size=(100, 1)), sg.FileBrowse(file_types = (('.CSV files', '*.csv *.CSV'),))],
         [sg.Text('Specify the root path for the JPG files.')],
         [sg.Input('', key='-IMGFOLDER-', size=(100, 1)), sg.FolderBrowse()],
+        [sg.Input('', key='_baselogfile_', size=(1,1), visible=False)] # Dirt hack to use a global variable
     ]
 
     optionslayout = [
@@ -23,8 +24,10 @@ def create_and_show_gui():
         [sg.Frame('Options', optionslayout)],
         [sg.Text('Output:')],
         [sg.Multiline(size=(140, 30), key = '_sgOutput_', autoscroll=True, auto_refresh=True)],
-        [sg.Push(),
+        [sg.Checkbox('Empty Output window before next run', key='_clean_output_', default=True),
+         sg.Push(),
          sg.Button('write EXIF metadata', font=('Calibri', 10, 'bold'), key='_WriteExif_'),
+         sg.Button('View logs', font=('Calibri', 10, 'bold'), key='_ViewLogs_', disabled=True),
          sg.Button('Close', font=('Calibri', 10, 'bold'), key='_Close_')]
     ]
 

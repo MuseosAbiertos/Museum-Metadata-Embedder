@@ -1,2 +1,4 @@
-
 .DS_Store
+__pycache__
+error_log_*
+success_log_*
