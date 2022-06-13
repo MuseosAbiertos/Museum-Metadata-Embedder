@@ -52,8 +52,9 @@ import csv
 import time
 import json
 import datetime
-import argparse
+import platform
 import subprocess
+import webbrowser
 
 from typing import Optional
 
@@ -61,6 +62,11 @@ import colorama  # type: ignore
 
 import PySimpleGUI as sg
 import ui_layout
+
+# Some global variables
+csvfile = True
+jpgfolder = True
+baselogfile = "" # Use it as copy for output_name
 
 SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 colorama.init()
@@ -151,6 +157,7 @@ class Csv2Exif:
     def _save_logs(self) -> None:
         """ Save the error and success logs for the sessions """
         output_name = self.csv_filepath.split('/')[-1].replace('.csv', '')
+        window.Element('_baselogfile_').Update(f'_{output_name}-{_get_current_time_for_filename()}.txt')
         output_name = f'{SCRIPT_PATH}/%s_{output_name}-{_get_current_time_for_filename()}.txt'
         with open(output_name % 'error_log', 'w', encoding='utf-8') as w_file:
             w_file.write('\n'.join(self.exif_tool_error_log))
@@ -227,7 +234,7 @@ class Csv2Exif:
                 # Mark row as successfully written if there were no errors
                 if self.__write_command(csv_index, row, filepath, write_key, tag_map, write_command):
                     self.exif_tool_success_log.append(f'On {write_key}: Row: "{csv_index}", filepath: "{filepath}"')
-                window.Element('_sgOutput_').Update(f'On {write_key}: Row: "{csv_index}", filepath: "{filepath}"\n', append=True)
+                #window.Element('_sgOutput_').Update(f'On {write_key}: Row: "{csv_index}", filepath: "{filepath}"\n', append=True)
 
         # 4 - Write error/success logs
         self._end_status()
@@ -350,8 +357,7 @@ class Csv2Exif:
 # Display the GUI to the user in the standard system default theme
 sg.theme('SystemDefault1') # I really dislike all these colourful, childish themes.
 window =  ui_layout.create_and_show_gui()
-csvfile = True
-jpgfolder = True
+
 
 while True:
     event, values = window.Read(timeout=100)
@@ -364,14 +370,26 @@ while True:
         if values['-IMGFOLDER-'] == '' or len(values['-IMGFOLDER-']) == 0:
             sg.popup("You did not provide/select a folder containing your JPG files.")
             jpgfolder = False
-            print('-notify-broken-keys-  ' + str(values['-notify-broken-keys-']))
-            print('-max-depth-  ' + values['-max-depth-'])
-            print('-row-progress-notify-  ' + values['-row-progress-notify-'])
         if csvfile and jpgfolder:
+            window['_ViewLogs_'].update(disabled=True)
+            if values['_clean_output_']:
+                window.Element('_sgOutput_').Update('', append=False)
             try:
                 C2E = Csv2Exif(window, values['-CSVFILE-'], values['-IMGFOLDER-'], row_progress_notify=int(values['-row-progress-notify-']),
                                notify_on_broken_keys=values['-notify-broken-keys-'], max_depth=int(values['-max-depth-']))
                 C2E.run()
+                window['_ViewLogs_'].update(disabled=False)
+                window.Element('_sgOutput_').Update(baselogfile, append=True)
             except Exception as ex:
                 print(ex)
+    elif event == '_ViewLogs_':
+        if platform.system() == 'Windows':
+            os.startfile(f'{SCRIPT_PATH}/error_log' + values['_baselogfile_'])
+            os.startfile(f'{SCRIPT_PATH}/success_log' + values['_baselogfile_'])
+        elif platform.system() == 'Darwin':
+            subprocess.call(['open', '-a', 'TextEdit', f'{SCRIPT_PATH}/error_log' + values['_baselogfile_']])
+            subprocess.call(['open', '-a', 'TextEdit', f'{SCRIPT_PATH}/success_log' + values['_baselogfile_']])
+        else:
+            webbrowser.open(f'{SCRIPT_PATH}/error_log' + values['_baselogfile_'])
+            webbrowser.open(f'{SCRIPT_PATH}/success_log' + values['_baselogfile_'])
 window.Close()
