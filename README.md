@@ -79,7 +79,7 @@ Se utiliza un mapa JSON para mapear Nombre de pantalla - Nombre de etiqueta, par
 Uso:  
     python3 gcsv2exif.py &
 
-## Requirements
+## Requerimientos
 ejecutar en la consola:  
     python3 -m pip install -r requirements.txt
 
