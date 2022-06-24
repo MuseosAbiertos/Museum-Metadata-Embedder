@@ -87,11 +87,22 @@ ejecutar en la consola:
 ---
 
 # Sponsors/Mecenas
-Esta aplicación ha sido posible gracias al programa de Mecenazgo Cultural de la Ciudad Autónoma de Buenos Aires, Argentina
+Esta aplicación ha sido posible gracias al programa de [Mecenazgo Cultural]([url](https://www.buenosaires.gob.ar/mecenazgo)) de la Ciudad Autónoma de Buenos Aires, Argentina
 
-![Logo Mecenazgo 2021 blanco](https://user-images.githubusercontent.com/693328/175469424-ba7cce63-1f2b-4083-bfb5-9d9c2d4a5067.png)
+![Logo Mecenazgo 2021 blanco](https://user-images.githubusercontent.com/693328/175651622-df6f7d4d-ba78-4862-88f1-3b161c48d428.png)
+
 
 y muy especialmente a nuestros mecenas
 
-- Banco Hipotecario [https://www.hipotecario.com.ar/]
-- Techniques & Supplies [https://www.techniques.com.ar/]
+### Banco Hipotecario [https://www.hipotecario.com.ar/]
+![Logo Banco Hipotecario](https://user-images.githubusercontent.com/693328/175657136-2524d56b-a0a8-493d-b96c-d84c7c5ef468.jpg)
+
+
+### Techniques & Supplies [https://www.techniques.com.ar/]
+
+### Digital Ocean
+
+<a href="https://www.digitalocean.com/community/pages/hollies-hub-for-good"><img src="https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%203.svg" alt="DigitalOcean Referral Badge" /></a>
+
+
+
