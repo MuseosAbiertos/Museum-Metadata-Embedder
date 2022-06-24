@@ -41,7 +41,8 @@ run on the command prompt:
     python3 -m pip install -r requirements.txt
 
 ---
----
+
+
 # csv2exif
 
 'csv2exif' registra los metadatos de las imágenes a partir de un CSV normalizado utilizando los estándares VRA Core, ISAD-G y Dublin Core.
@@ -82,3 +83,15 @@ Uso:
 ejecutar en la consola:  
     python3 -m pip install -r requirements.txt
 
+
+---
+
+# Sponsors/Mecenas
+Esta aplicación ha sido posible gracias al programa de Mecenazgo Cultural de la Ciudad Autónoma de Buenos Aires, Argentina
+
+![Logo Mecenazgo 2021 blanco](https://user-images.githubusercontent.com/693328/175469424-ba7cce63-1f2b-4083-bfb5-9d9c2d4a5067.png)
+
+y muy especialmente a nuestros mecenas
+
+- Banco Hipotecario [https://www.hipotecario.com.ar/]
+- Techniques & Supplies [https://www.techniques.com.ar/]
