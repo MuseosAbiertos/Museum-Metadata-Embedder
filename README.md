@@ -85,6 +85,10 @@ ejecutar en la consola:
 
 
 ---
+# Acknowledgments/Agradecimientos
+* Harry van der Wolf
+* Greg Reser
+* Jairo Serrano
 
 # Sponsors/Mecenas
 Esta aplicación ha sido posible gracias al programa de **Mecenazgo Cultural** de la Ciudad Autónoma de Buenos Aires, Argentina
