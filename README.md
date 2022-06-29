@@ -86,9 +86,10 @@ ejecutar en la consola:
 
 ---
 # Acknowledgments/Agradecimientos
-* Harry van der Wolf
-* Greg Reser
-* Jairo Serrano
+* Harry van der Wolf (Por su inestimable colaboración y crear la GUI y ejecutables multiplataforma)
+* Greg Reser (Por todo su apoyo y colaboración en esta implementacion de VRA Core)
+* Phil Harvey (Por su maravilloso ExifTool, que pronto cumplirá 30 años!)
+* Jairo Serrano (Mi amigo y estimado SysOp que logra que todo funcione sin romperse y lo repara cuando se rompe)
 
 # Sponsors/Mecenas
 Esta aplicación ha sido posible gracias al programa de **Mecenazgo Cultural** de la Ciudad Autónoma de Buenos Aires, Argentina
@@ -97,7 +98,7 @@ Esta aplicación ha sido posible gracias al programa de **Mecenazgo Cultural** d
 
 https://www.buenosaires.gob.ar/mecenazgo
 
-y muy especialmente a nuestros mecenas
+y especialmente a nuestros mecenas
 
 * Banco Hipotecario https://www.hipotecario.com.ar
 * Techniques & Supplies https://www.techniques.com.ar
