@@ -86,7 +86,7 @@ ejecutar en la consola:
 
 ---
 # Acknowledgments/Agradecimientos
-* Harry van der Wolf (Por su inestimable colaboración, crear la GUI y sus ejecutables multiplataforma)
+* Harry van der Wolf (Por su inestimable colaboración y la creación la GUI y sus ejecutables multiplataforma)
 * Greg Reser (Por todo su apoyo y colaboración en esta implementacion de VRA Core)
 * Phil Harvey (Por su maravilloso ExifTool, que pronto cumplirá 30 años!)
 * Jairo Serrano (Mi amigo y estimado SysOp que logra que todo funcione sin romperse y lo repara cuando se rompe)
