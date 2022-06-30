@@ -89,7 +89,7 @@ ejecutar en la consola:
 * Harry van der Wolf (Por su inestimable colaboración y la creación la GUI y sus ejecutables multiplataforma)
 * Greg Reser (Por todo su apoyo y colaboración en esta implementacion de VRA Core)
 * Phil Harvey (Por su maravilloso ExifTool, que pronto cumplirá 30 años!)
-* Jairo Serrano (Mi amigo y estimado SysOp que logra que todo funcione sin romperse y lo repara cuando se rompe)
+* Jairo Serrano (Amigo y estimado SysOp que logra que todo funcione sin romperse y lo repara cuando se rompe)
 
 # Sponsors/Mecenas
 Esta aplicación ha sido posible gracias al programa de **Mecenazgo Cultural** de la Ciudad Autónoma de Buenos Aires, Argentina
