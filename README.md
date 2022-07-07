@@ -1,111 +1,63 @@
-# csv2exif
+**MME** (Museum Metadata Embedder) -anteriormente 'csv2exif'- escribe (incrusta) metadatos -[Dublin Core](https://dublincore.org/specifications/dublin-core/), [VRA Core](https://core.vraweb.org/), [XMP](https://www.adobe.com/products/xmp.html), [ISAD(G)](https://www.ica.org/sites/default/files/CBPS_2000_Guidelines_ISAD(G)_Second-edition_EN.pdf), [IPTC](https://iptc.org/standards/photo-metadata/), [EXIF](https://docs.fileformat.com/image/exif/) y otros más- en [todo tipo de imágenes](https://exiftool.org/#supported) y archivos PDF a partir de un CSV normalizado.
 
-'csv2exif' records metadata on images from a normalized CSV using VRA Core, ISAD-G & Dublin Core standards.
+**MME** es una aplicación de línea de comandos Python 3, que utiliza [ExifTool](https://exiftool.org/) (de Phil Harvey) y también tiene una interfaz gráfica, ejecutable en Linux, MacOS y Windows.
 
-Use ExifTool (by Phil Harvey) to write EXIF metadata on images according to an 
-input CSV and a set of mapping rules according to naming standards: VRA CORE / ISAD-G / Dublin Core
+## Uso
+<code>python csv2exif.py RUTA_CSV RUTA_IMAGES</code>
+argumentos posicionales: CSV_PATH ruta para el archivo CSV a procesar. JPGS_PATH ruta de acceso a los archivos JPG.
+Ejemplo: <code> python3 csv2exif.py csv/test.csv images/</code>
 
-See supported images: https://exiftool.org/#supported
+### Opciones
+-h, --help mostrar este mensaje de ayuda y salir
 
-Usage:  
-    python csv2exif.py CSV_PATH IMAGES_ROOT_PATH
+--row-progress-notify ROW_PROGRESS_NOTIFY, -r ROW_PROGRESS_NOTIFY
+el número de filas entre las notificaciones de progreso. 100 por defecto
 
-positional arguments:
-CSV_PATH path for the CSV file to process.
-JPGS_PATH root path for the JPG files.
+--notify-broken-keys NOTIFY_BROKEN_KEYS, -n NOTIFY_BROKEN_KEYS
+Notificar sobre claves rotas/faltantes en el CSV. Falso por defecto.
 
-Options:  
+--max-depth MAX_DEPTH, -m MAX_DEPTH
+Profundidad máxima de las subcarpetas para buscar JPGS. 3 por defecto
 
--h, --help  [show this help message and exit]  
-  
--r ROW_PROGRESS_NOTIFY  --row-progress-notify ROW_PROGRESS_NOTIFY  
-[how many rows between progress notifications. 100 by default]  
-  
--n NOTIFY_BROKEN_KEYS   --notify-broken-keys NOTIFY_BROKEN_KEYS  
-[Notify on broken/missing keys in the CSV. False by default]  
-  
--m MAX_DEPTH    --max-depth MAX_DEPTH  
-[Max depth of sub-folders to look into when looking for JPGS. 3 by default]  
-  
-A JSON map is used to map Screen Name - Tag Name, for each of the standards. The file must be within the 'data' directory, in a JSON file called 'maps.json'. 
+### Configuración personalizada
+**MME** utiliza un mapa JSON para mapear el _"Nombre de pantalla" (Encabezado de la columna CSV) <-> "Nombre de etiqueta"_, para cada uno de los estándares. El archivo debe encontrarse dentro del directorio 'data', en un archivo JSON llamado 'maps.json'.
+Este archivo se puede editar para agregar nuevas etiquetas.
 
-# gcsv2exif
+Sólo es necesario editar las cabeceras (primera fila de la hoja de cálculo) para que se ajusten al esquema. Esto puede implicar la división de algunas columnas para ajustarse al esquema, la adición de columnas y otras ediciones. Todo esto es probablemente más fácil, más rápido y más preciso de hacer en una hoja de cálculo.
 
-'gcsv2exif' is the graphical version of csv2exif.py. It is a python3 (only) script. It does not accept arguments.  
+### GMME (Interfaz gráfica)
+'gmme' es la versión gráfica de mme.py. Es un script de python3 (solamente). No acepta argumentos.
 
-Usage:  
-    python3 gcsv2exif.py &
+Uso:
+<code>python3 gmme.py & </code>
 
-## Requirements
-run on the command prompt:  
-    python3 -m pip install -r requirements.txt
+### Historia
+Mayormente, las colecciones de objetos se encuentran en hojas de cálculo que listan el contenido de sus colecciones, acompañado por las imágenes que los representan. Es decir que para ver los metadatos de una imagen, se debe contar con una aplicación para hojas de cálculo; si quieres enviarla por email, debes enviar ambos archivos, donde el CSV o XLSX contiene normalmente la totalidad de la colección.
+**MME** incrusta los metadatos de modo que ellos siempre se encuentren 'dentro' de la imagen, facilitando la ingestión por otras herramientas y simplificando los procesos de registro y difusión.
 
----
+Para leer los metadatos 'detallados' de una imagen o un archivo PDF, solo es necesario ejecutar:
+<code>exiftool -a -G1 -s [archivo] </code>
+o utilizar [Adobe Bridge Custom Metadata Panel](https://github.com/adobe-dmeservices/custom-metadata) o un servicio online, como [The Exifer](https://www.thexifer.net/)
 
 
-# csv2exif
-
-'csv2exif' registra los metadatos de las imágenes a partir de un CSV normalizado utilizando los estándares VRA Core, ISAD-G y Dublin Core.
-
-Utiliza ExifTool (por Phil Harvey) para escribir los metadatos EXIF en las imágenes, según un CSV de entrada y un conjunto de reglas de mapeo según los estándares: VRA CORE / ISAD-G / Dublin Core
-
-Ver imágenes soportadas: https://exiftool.org/#supported
-
-Uso:  
-    python csv2exif.py RUTA_CSV RUTA_IMAGES
-
-argumentos posicionales:
-CSV_PATH ruta para el archivo CSV a procesar.
-JPGS_PATH ruta de acceso a los archivos JPG.
-
-Opciones:  
--h, --help mostrar este mensaje de ayuda y salir  
-  
---row-progress-notify ROW_PROGRESS_NOTIFY, -r ROW_PROGRESS_NOTIFY  
-el número de filas entre las notificaciones de progreso. 100 por defecto  
-  
---notify-broken-keys NOTIFY_BROKEN_KEYS, -n NOTIFY_BROKEN_KEYS  
-Notificar sobre claves rotas/faltantes en el CSV. Falso por defecto.  
-  
---max-depth MAX_DEPTH, -m MAX_DEPTH  
-Profundidad máxima de las subcarpetas para buscar JPGS. 3 por defecto  
-  
-Se utiliza un mapa JSON para mapear Nombre de pantalla - Nombre de etiqueta, para cada uno de los estándares. El archivo debe estar dentro del directorio 'data', en un archivo JSON llamado 'maps.json'. 
-
-# gcsv2exif
-
-'gcsv2exif' es la versión gráfica de csv2exif.py. Es un script de python3 (solamente). No acepta argumentos.  
-
-Uso:  
-    python3 gcsv2exif.py &
-
-## Requerimientos
-ejecutar en la consola:  
-    python3 -m pip install -r requirements.txt
-
-
----
-# Acknowledgments/Agradecimientos
+## Acknowledgments/Agradecimientos
 * Harry van der Wolf [Por su inestimable colaboración y la creación de la interfaz gráfica (GUI) y sus ejecutables multiplataforma]
 * Greg Reser [Por todo su apoyo y colaboración en esta implementacion de VRA Core]
 * Phil Harvey [Por su maravilloso ExifTool, que pronto cumplirá 30 años!]
 * Jairo Serrano [Amigo y estimado SysOp que logra que todo funcione sin romperse y lo repara cuando se rompe]
 * Sebastián Gersbach [Por el diseño del logo y el paquete de iconos]
 
-# Sponsors/Mecenas
-Esta aplicación ha sido posible gracias al programa de **Mecenazgo Cultural** de la Ciudad Autónoma de Buenos Aires, Argentina
+## Sponsors/Mecenas
+Esta aplicación ha sido posible gracias al programa de Mecenazgo Cultural de la Ciudad Autónoma de Buenos Aires, Argentina
 
-![Logo Mecenazgo 2021 blanco](https://user-images.githubusercontent.com/693328/175651622-df6f7d4d-ba78-4862-88f1-3b161c48d428.png)
-
-https://www.buenosaires.gob.ar/mecenazgo
+![Logo%20Mecenazgo%202021%20negro%20ch](Logo%20Mecenazgo%202021%20negro%20ch.png "Logo%20Mecenazgo%202021%20negro%20ch")
 
 y especialmente a nuestros mecenas
 
-* Banco Hipotecario https://www.hipotecario.com.ar
-* Techniques & Supplies https://www.techniques.com.ar
-* Digital Ocean [https://www.digitalocean.com](https://www.digitalocean.com/community/pages/hollies-hub-for-good)
+Banco Hipotecario https://www.hipotecario.com.ar
+Techniques & Supplies https://www.techniques.com.ar
+Digital Ocean https://www.digitalocean.com
 
-|                                                                                                                                |                                                                                                                         |                                                                                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| ![Logo Banco Hipotecario](https://user-images.githubusercontent.com/693328/175657136-2524d56b-a0a8-493d-b96c-d84c7c5ef468.jpg) | ![Logo Techniques](https://user-images.githubusercontent.com/693328/175666054-1ca8f020-2c31-448e-8e9d-b6f2e26811e6.jpg) | ![DO_Logo_Horizontal_Blue](https://user-images.githubusercontent.com/693328/176058383-2fa26c85-a67b-4065-8707-451a0e4daa45.png) |
-
+![Logo%20Banco%20Hipotecario](Logo%20Banco%20Hipotecario.jpg "Logo%20Banco%20Hipotecario")
+![Logo%20Techniques](Logo%20Techniques.jpg "Logo%20Techniques")
+![DO_Logo_Horizontal_Blue](DO_Logo_Horizontal_Blue.png "DO_Logo_Horizontal_Blue")
