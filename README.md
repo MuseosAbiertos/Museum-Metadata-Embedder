@@ -3,9 +3,9 @@
 **MME** es una aplicación de línea de comandos Python 3, que utiliza [ExifTool](https://exiftool.org/) (de Phil Harvey) y también tiene una interfaz gráfica, ejecutable en Linux, MacOS y Windows.
 
 ## Uso
-<code>python csv2exif.py RUTA_CSV RUTA_IMAGES</code>
+<code>python mme.py RUTA_CSV RUTA_IMAGES</code>
 argumentos posicionales: CSV_PATH ruta para el archivo CSV a procesar. JPGS_PATH ruta de acceso a los archivos JPG.
-Ejemplo: <code> python3 csv2exif.py csv/test.csv images/</code>
+Ejemplo: <code> python3 mme.py csv/test.csv images/</code>
 
 ### Opciones
 -h, --help mostrar este mensaje de ayuda y salir
