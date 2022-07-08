@@ -40,6 +40,8 @@ Uso:
 ```s
 python3 gmme.py &
 ```  
+### Documentación
+https://docs.museosabiertos.org/museum-metadata-embedder
 
 ### Historia
 Mayormente, las colecciones de objetos se encuentran en hojas de cálculo que listan el contenido de sus colecciones, acompañado por las imágenes que los representan. Es decir que para ver los metadatos de una imagen, se debe contar con una aplicación para hojas de cálculo; si quieres enviarla por email, debes enviar ambos archivos, donde el CSV o XLSX contiene normalmente la totalidad de la colección.
