@@ -84,7 +84,7 @@ def _get_current_time_for_filename() -> str:
     return _get_current_time().replace(':', '-')
 
 
-class Csv2Exif:
+class MME:
     """ Main class """
     DELETE_VRAE_TAGS = ['exiftool', '-v', '-xmp-vrae:all=']
     DELETE_ISADG_TAGS = ['exiftool', '-v', '-xmp-isadg:all=']
@@ -211,9 +211,9 @@ class Csv2Exif:
                 continue  # Next row
 
             # 2 - Delete tags
-            delete_map = {'DELETE VRAE TAGS': Csv2Exif.DELETE_VRAE_TAGS,
-                          'DELETE ISADG TAGS': Csv2Exif.DELETE_ISADG_TAGS,
-                          'DELETE DC TAGS': Csv2Exif.DELETE_DC_TAGS}
+            delete_map = {'DELETE VRAE TAGS': MME.DELETE_VRAE_TAGS,
+                          'DELETE ISADG TAGS': MME.DELETE_ISADG_TAGS,
+                          'DELETE DC TAGS': MME.DELETE_DC_TAGS}
 
             for delete_key in delete_map.keys():
                 self._status_msg(f'{index}/{len(self.rows)} - {delete_key} on {filename}')
@@ -222,9 +222,9 @@ class Csv2Exif:
                     continue  # Next row
 
             # 3 - Write tags
-            write_map = {'WRITE VRAE TAGS': [self.maps['vrae'], Csv2Exif.WRITE_VRAE_TAGS],
-                         'WRITE ISADG TAGS': [self.maps['isadg'], Csv2Exif.WRITE_ISADG_TAGS],
-                         'WRITE DC TAGS': [self.maps['dc'], Csv2Exif.WRITE_DC_TAGS]}
+            write_map = {'WRITE VRAE TAGS': [self.maps['vrae'], MME.WRITE_VRAE_TAGS],
+                         'WRITE ISADG TAGS': [self.maps['isadg'], MME.WRITE_ISADG_TAGS],
+                         'WRITE DC TAGS': [self.maps['dc'], MME.WRITE_DC_TAGS]}
 
             for write_key in write_map.keys():
                 tag_map, write_command = write_map[write_key]
@@ -331,7 +331,7 @@ class Csv2Exif:
         #window.Element('_sgOutput_').Update(value=x.stdout.decode("utf-8"), append=True)
         #window.Element('_sgOutput_').Update(value=x.stderr.decode("utf-8"), append=True)
         #window.refresh()
-        return Csv2Exif._prettify_success_message(x.stdout.decode("utf-8").replace('\n', '|')), \
+        return MME._prettify_success_message(x.stdout.decode("utf-8").replace('\n', '|')), \
                x.stderr.decode("utf-8").replace('\n', '|')
 
 
@@ -343,7 +343,7 @@ class Csv2Exif:
         #window.Element('_sgOutput_').Update(value=x.stdout.decode("utf-8"), append=True)
         #window.Element('_sgOutput_').Update(value=x.stderr.decode("utf-8"), append=True)
         #window.refresh()
-        return Csv2Exif._prettify_success_message(x.stdout.decode("utf-8").replace('\n', '|')), \
+        return MME._prettify_success_message(x.stdout.decode("utf-8").replace('\n', '|')), \
                x.stderr.decode("utf-8").replace('\n', '|')
 
     @staticmethod
@@ -375,7 +375,7 @@ while True:
             if values['_clean_output_']:
                 window.Element('_sgOutput_').Update('', append=False)
             try:
-                C2E = Csv2Exif(window, values['-CSVFILE-'], values['-IMGFOLDER-'], row_progress_notify=int(values['-row-progress-notify-']),
+                C2E = MME(window, values['-CSVFILE-'], values['-IMGFOLDER-'], row_progress_notify=int(values['-row-progress-notify-']),
                                notify_on_broken_keys=values['-notify-broken-keys-'], max_depth=int(values['-max-depth-']))
                 C2E.run()
                 window['_ViewLogs_'].update(disabled=False)

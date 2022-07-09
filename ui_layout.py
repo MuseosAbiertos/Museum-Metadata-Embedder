@@ -32,4 +32,4 @@ def create_and_show_gui():
     ]
 
     # Open the window and return it to main script
-    return sg.Window('csv2exif', layout)
+    return sg.Window('MME', layout)

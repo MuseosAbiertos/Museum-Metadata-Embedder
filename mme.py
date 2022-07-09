@@ -7,7 +7,7 @@ Use exiftool (by Phil Harvey) to write EXIF metadata on jpgs according to an inp
 standards: VRAE/ISADG/DC
 
 Usage:
-    python csv2exif.py CSV_PATH IMAGES_ROOT_PATH
+    python MME.py CSV_PATH IMAGES_ROOT_PATH
 
 A JSON map is used to map Screen Name - Tag Name, for each of the standards. The file must be within the data/
 directory, in a JSON file called: maps.json. The structure is as follows:
@@ -16,7 +16,7 @@ Use exiftool to write exif data on jpgs according to an input CSV and a set of m
 standards: VRAE/ISADG/DC
 
 Usage:
-    python csv2exif.py CSV_PATH IMAGES_ROOT_PATH
+    python MME.py CSV_PATH IMAGES_ROOT_PATH
 
 A JSON map is used to map Screen Name - Tag Name, for each of the standards. The file must be within the data/
 directory, in a JSON file called: maps.json. The structure is as follows:
@@ -71,7 +71,7 @@ def _get_current_time_for_filename() -> str:
     return _get_current_time().replace(':', '-')
 
 
-class Csv2Exif:
+class MME:
     """ Main class """
     DELETE_VRAE_TAGS = ['exiftool', '-v', '-xmp-vrae:all=']
     DELETE_ISADG_TAGS = ['exiftool', '-v', '-xmp-isadg:all=']
@@ -187,9 +187,9 @@ class Csv2Exif:
                 continue  # Next row
 
             # 2 - Delete tags
-            delete_map = {'DELETE VRAE TAGS': Csv2Exif.DELETE_VRAE_TAGS,
-                          'DELETE ISADG TAGS': Csv2Exif.DELETE_ISADG_TAGS,
-                          'DELETE DC TAGS': Csv2Exif.DELETE_DC_TAGS}
+            delete_map = {'DELETE VRAE TAGS': MME.DELETE_VRAE_TAGS,
+                          'DELETE ISADG TAGS': MME.DELETE_ISADG_TAGS,
+                          'DELETE DC TAGS': MME.DELETE_DC_TAGS}
 
             for delete_key in delete_map.keys():
                 self._status_msg(f'{index}/{len(self.rows)} - {delete_key} on {filename}')
@@ -197,9 +197,9 @@ class Csv2Exif:
                     continue  # Next row
 
             # 3 - Write tags
-            write_map = {'WRITE VRAE TAGS': [self.maps['vrae'], Csv2Exif.WRITE_VRAE_TAGS],
-                         'WRITE ISADG TAGS': [self.maps['isadg'], Csv2Exif.WRITE_ISADG_TAGS],
-                         'WRITE DC TAGS': [self.maps['dc'], Csv2Exif.WRITE_DC_TAGS]}
+            write_map = {'WRITE VRAE TAGS': [self.maps['vrae'], MME.WRITE_VRAE_TAGS],
+                         'WRITE ISADG TAGS': [self.maps['isadg'], MME.WRITE_ISADG_TAGS],
+                         'WRITE DC TAGS': [self.maps['dc'], MME.WRITE_DC_TAGS]}
 
             for write_key in write_map.keys():
                 tag_map, write_command = write_map[write_key]
@@ -287,14 +287,14 @@ class Csv2Exif:
     def __delete_command_wrapper(delete_command: list[str], filepath: str) -> tuple[str, str]:
         """ Wrap a call to exiftool to delete tags """
         x = subprocess.run(delete_command + [filepath], capture_output=True)
-        return Csv2Exif._prettify_success_message(x.stdout.decode("utf-8").replace('\n', '|')), \
+        return MME._prettify_success_message(x.stdout.decode("utf-8").replace('\n', '|')), \
                x.stderr.decode("utf-8").replace('\n', '|')
 
     @staticmethod
     def __write_command_wrapper(write_command: list[str], key_value_pair: str, filepath: str) -> tuple[str, str]:
         """ Wrap a call to exiftool to write tags """
         x = subprocess.run(write_command + [key_value_pair, filepath], capture_output=True)
-        return Csv2Exif._prettify_success_message(x.stdout.decode("utf-8").replace('\n', '|')), \
+        return MME._prettify_success_message(x.stdout.decode("utf-8").replace('\n', '|')), \
                x.stderr.decode("utf-8").replace('\n', '|')
 
     @staticmethod
@@ -303,7 +303,7 @@ class Csv2Exif:
         return msg.replace('Rewriting', 'REWRITING:').replace('Editing tags in', 'EDITING TAGS IN')
 
 
-parser = argparse.ArgumentParser(prog="csv2exif", description="Use exiftool to write exif data on jpgs according "
+parser = argparse.ArgumentParser(prog="MME", description="Use exiftool to write exif data on jpgs according "
                                                               "to an input CSV and a set of mapping rules according "
                                                               "to naming standards: VRAE/ISADG/DC")
 parser.add_argument('CSV_PATH', nargs=1, type=str, help='path for the CSV file to process.')
@@ -316,6 +316,6 @@ parser.add_argument('--max-depth', '-m', type=int, default=3, help='Max depth of
                                                                    'for JPGS. 3 by default')
 
 parsed_args = (parser.parse_args())
-C2E = Csv2Exif(parsed_args.CSV_PATH[0], parsed_args.JPGS_PATH[0], row_progress_notify=parsed_args.row_progress_notify,
+C2E = MME(parsed_args.CSV_PATH[0], parsed_args.JPGS_PATH[0], row_progress_notify=parsed_args.row_progress_notify,
                notify_on_broken_keys=parsed_args.notify_broken_keys, max_depth=parsed_args.max_depth)
 C2E.run()
