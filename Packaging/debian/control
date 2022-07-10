@@ -1,0 +1,12 @@
+Section: Graphics;Utility;Art;Photography;
+Priority: optional
+Architecture: all
+Maintainer: Harry van der Wolf <hvdwolf@gmail.com>
+Description: gmme is a python3/tkinter/pysimplegui
+ Windows/Linux/MacOS graphical frontend for bulk adding
+ exif, xmp and iptc data to images using VRA Core, ISAD-G &
+ Dublin Core standards.
+Depends: python3, python3-tk, libimage-exiftool-perl
+Homepage: https://github.com/MuseosAbiertos/mme
+Vcs-Git: https://github.com/MuseosAbiertos/mme.git
+Vcs-Browser: https://github.com/MuseosAbiertos/mme
