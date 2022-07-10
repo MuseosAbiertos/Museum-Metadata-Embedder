@@ -24,7 +24,7 @@ def create_and_show_gui():
     layout = [
         [sg.Frame('CSV file and JPGs root folder', folderfileframelayout)],
         [sg.Frame('Options', optionslayout)],
-        [sg.Text('Output:'), sg.Push(), sg.Text(f'All logs are written to folder: ' + str(Path.home()) + os.path.sep + 'gcsv2exif_logs', font=('any', 10, 'italic'))],
+        [sg.Text('Output:'), sg.Push(), sg.Text(f'All logs are written to folder: ' + str(Path.home()) + os.path.sep + 'Museum-Metadata-Embedder_logs', font=('any', 10, 'italic'))],
         [sg.Multiline(size=(140, 30), key = '_sgOutput_', autoscroll=True, auto_refresh=True)],
         [sg.Checkbox('Empty Output window before next run', key='_clean_output_', default=True),
          sg.Push(),
