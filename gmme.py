@@ -74,7 +74,7 @@ colorama.init()
 
 def _get_log_path() -> str:
     """ Get and create log folder"""
-    log_path = str(Path.home()) + os.path.sep + 'gcsv2exif_logs'
+    log_path = str(Path.home()) + os.path.sep + 'Museum-Metadata-Embedder_logs'
     if not os.path.isdir(log_path):
         os.mkdir(log_path)
     return log_path
