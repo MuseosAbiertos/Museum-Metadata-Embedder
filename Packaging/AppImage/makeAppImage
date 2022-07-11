@@ -24,7 +24,7 @@ ROOTDIR=$(pwd)
 
 printf "\nRemove possible previous build and dist folders and recreate binary\n\n"
 rm -rf dist build *.spec
-pyinstaller --icon "${ROOTDIR}/logos/MME.png" --add-data "${RWD}/logos*:./logos" gmme.py
+pyinstaller --icon "${ROOTDIR}/logos/MME.png" --add-data "${ROOTDIR}/logos/*:./logos" gmme.py
 
 
 printf "\n\nMove back to our AppImage folder\n\n"
@@ -32,7 +32,15 @@ cd $WORKDIR
 #
 printf "Remove, create and step into our AppDir\n\n"
 #
-AppDir="Museum-Metadata-Embedder-x86_64"
+arch=$(uname -m)
+if [ "$arch" == 'x86_64' ];
+then 
+    AppDir="Museum-Metadata-Embedder-x86_64"
+fi
+if [[ $arch =~ ^arm ]];
+then
+    AppDir="Museum-Metadata-Embedder-armhf"
+fi
 rm -rf ${AppDir}
 mkdir -p ${AppDir}
 cd ${AppDir}
@@ -57,9 +65,9 @@ cp -r $ROOTDIR/data .
 
 cp -r $ROOTDIR/exiftool/Image-ExifTool-12.41/* usr/bin
 chmod +x usr/bin/exiftool
-cp ../museum-metadata-embedder.desktop usr/share/applications
-cp ../museum-metadata-embedder.desktop .
-cp ../museum-metadata-embedder.appdata.xml usr/share/metainfo
+cp $WORKDIR/museum-metadata-embedder.desktop usr/share/applications
+cp $WORKDIR/museum-metadata-embedder.desktop .
+cp $WORKDIR/museum-metadata-embedder.appdata.xml usr/share/metainfo
 
 
 printf "\n\nNow copy license into our AppImage\n\n"
@@ -87,13 +95,34 @@ cd ..
 #
 # Create the AppImage
 #
-wget -c https://github.com/AppImage/AppImageKit/releases/download/12/appimagetool-x86_64.AppImage
-chmod +x appimagetool-x86_64.AppImage
-ARCH=x86_64 ./appimagetool-x86_64.AppImage -n ${AppDir}
+arch=$(uname -m)
+printf "\nBuilding for machine/architecture: $arch\n"
+if [ "$arch" == 'x86_64' ];
+then 
+    wget -c https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-x86_64.AppImage
+    chmod +x appimagetool-x86_64.AppImage
+    ARCH=x86_64 ./appimagetool-x86_64.AppImage -n ${AppDir}
+fi
+if [[ $arch =~ ^arm ]];
+then
+    wget -c https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-armhf.AppImage
+    chmod +x appimagetool-armhf.AppImage
+    ARCH=armv71 ./appimagetool-armhf.AppImage -n ${AppDir}
+fi
+
 
 #
 # Rename the created app image and zip it
 #
-mv Museum-Metadata-Embedder-x86_64.AppImage Museum-Metadata-Embedder-${VER}-x86_64.AppImage
-cp -r $ROOTDIR/LICENSE .
-zip Museum-Metadata-Embedder-${VER}-x86_64.AppImage.zip Museum-Metadata-Embedder-${VER}-x86_64.AppImage LICENSE
+if [ "$arch" == 'x86_64' ];
+then 
+    mv Museum-Metadata-Embedder-x86_64.AppImage Museum-Metadata-Embedder-${VER}-x86_64.AppImage
+    cp -r $ROOTDIR/LICENSE .
+    zip Museum-Metadata-Embedder-${VER}-x86_64.AppImage.zip Museum-Metadata-Embedder-${VER}-x86_64.AppImage LICENSE
+fi
+if [[ $arch =~ ^arm ]];
+then
+    mv Museum-Metadata-Embedder-armhf.AppImage Museum-Metadata-Embedder-${VER}-armhf.AppImage
+    cp -r $ROOTDIR/LICENSE .
+    zip Museum-Metadata-Embedder-${VER}-armhf.AppImage.zip Museum-Metadata-Embedder-${VER}-armhf.AppImage LICENSE
+fi
