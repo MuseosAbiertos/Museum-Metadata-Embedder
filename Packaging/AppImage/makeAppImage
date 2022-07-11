@@ -24,7 +24,7 @@ ROOTDIR=$(pwd)
 
 printf "\nRemove possible previous build and dist folders and recreate binary\n\n"
 rm -rf dist build *.spec
-pyinstaller gmme.py
+pyinstaller --icon "${ROOTDIR}/logos/MME.png" --add-data "${RWD}/logos*:./logos" gmme.py
 
 
 printf "\n\nMove back to our AppImage folder\n\n"
@@ -50,16 +50,19 @@ mkdir -p usr/share/museum-metadata-embedder
 mkdir -p usr/share/applications
 mkdir -p usr/share/metainfo
 
-cp ../logo.png usr/share/museum-metadata-embedder
-cp ../logo.png .
+cp $ROOTDIR/logos/MME.png usr/share/museum-metadata-embedder
+cp $ROOTDIR/logos/MME.png .
+cp -r $ROOTDIR/logos .
 cp -r $ROOTDIR/data .
-cp -r $ROOTDIR/exiftool .
+
+cp -r $ROOTDIR/exiftool/Image-ExifTool-12.41/* usr/bin
+chmod +x usr/bin/exiftool
 cp ../museum-metadata-embedder.desktop usr/share/applications
 cp ../museum-metadata-embedder.desktop .
 cp ../museum-metadata-embedder.appdata.xml usr/share/metainfo
 
 
-printf "\n\nNow copy licenseinto our AppImage\n\n"
+printf "\n\nNow copy license into our AppImage\n\n"
 
 cp -r $ROOTDIR/LICENSE .
 

@@ -94,13 +94,25 @@ def _get_current_time_for_filename() -> str:
 
 class MME:
     """ Main class """
-    DELETE_VRAE_TAGS = ['exiftool', '-v', '-xmp-vrae:all=']
-    DELETE_ISADG_TAGS = ['exiftool', '-v', '-xmp-isadg:all=']
-    DELETE_DC_TAGS = ['exiftool', '-v', '-xmp-dc:all=']
+	# Check if we are running from inside a pyinstaller binary
+    testpyinstaller = getattr(sys, '_MEIPASS', 'NotRunningInPyInstaller')
+    #print('testpyinstaller: ', testpyinstaller)
+    if platform.system() == 'Windows' and testpyinstaller != 'NotRunningInPyInstaller':
+        DELETE_VRAE_TAGS = [f'{testpyinstaller}/exiftool.exe', '-v', '-xmp-vrae:all=']
+        DELETE_ISADG_TAGS = [f'{testpyinstaller}/exiftool.exe', '-v', '-xmp-isadg:all=']
+        DELETE_DC_TAGS = [f'{testpyinstaller}/exiftool.exe', '-v', '-xmp-dc:all=']
 
-    WRITE_VRAE_TAGS = ['exiftool', '-config', f'{SCRIPT_PATH}/data/exiftool_configs/vrae.config']
-    WRITE_ISADG_TAGS = ['exiftool', '-config', f'{SCRIPT_PATH}/data/exiftool_configs/isadg.config']
-    WRITE_DC_TAGS = ['exiftool']
+        WRITE_VRAE_TAGS = [f'{testpyinstaller}\exiftool.exe', '-config', f'{testpyinstaller}/data/exiftool_configs/vrae.config']
+        WRITE_ISADG_TAGS = [f'{testpyinstaller}\exiftool.exe', '-config', f'{testpyinstaller}/data/exiftool_configs/isadg.config']
+        WRITE_DC_TAGS = [f'{testpyinstaller}\exiftool.exe']
+    else: 
+        DELETE_VRAE_TAGS = ['exiftool', '-v', '-xmp-vrae:all=']
+        DELETE_ISADG_TAGS = ['exiftool', '-v', '-xmp-isadg:all=']
+        DELETE_DC_TAGS = ['exiftool', '-v', '-xmp-dc:all=']
+
+        WRITE_VRAE_TAGS = ['exiftool', '-config', f'{SCRIPT_PATH}/data/exiftool_configs/vrae.config']
+        WRITE_ISADG_TAGS = ['exiftool', '-config', f'{SCRIPT_PATH}/data/exiftool_configs/isadg.config']
+        WRITE_DC_TAGS = ['exiftool']
 
     def __init__(self, window: sg.Window, csv_filepath: str, images_root_path: str, row_progress_notify: int = 100,
                  notify_on_broken_keys: bool = False, max_depth: int = 3):

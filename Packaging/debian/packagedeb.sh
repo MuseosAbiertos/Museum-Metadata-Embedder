@@ -26,7 +26,7 @@ printf "Current source dir $RWD\n"
 
 printf "\nRemove possible previous build and dist folders and recreate binary\n\n"
 rm -rf dist build *.spec
-pyinstaller gmme.py
+pyinstaller --icon "${RWD}/logos/MME.png" --add-data "${RWD}/logos/*:./logos" gmme.py
 
 printf "\n\n### Finished with the pyinstaller stuff ###"
 printf "\nCreate the DEBIAN .deb\n"
@@ -54,24 +54,20 @@ cp -r $RWD/data $TEMP_DIR/debian/usr/bin/
 chmod +x $TEMP_DIR/debian/usr/bin/*
 cp *.desktop $TEMP_DIR/debian/usr/share/applications/
 cp -r $RWD/data $TEMP_DIR/debian/usr/share/$PACKAGE_NAME
-#cp -r $RWD/exiftool $TEMP_DIR/debian/usr/share/$PACKAGE_NAME
 cp copyright $TEMP_DIR/debian/usr/share/common-licenses/$PACKAGE_NAME/ # results in no copyright warning
 cp copyright $TEMP_DIR/debian/usr/share/doc/$PACKAGE_NAME/
 cp $RWD/LICENSE $TEMP_DIR/debian/usr/share/common-licenses/$PACKAGE_NAME/
 cp $RWD/LICENSE $TEMP_DIR/debian/usr/share/doc/$PACKAGE_NAME/
 
-printf "\nCopy/configure our Museum-Metadata-Embedder package inside the deb\n" 
+printf "\nCopy/configure our Museum-Metadata-Embedder package inside the deb\n\n" 
 cp -rp $RWD/dist/gmme/* $TEMP_DIR/debian/usr/share/$PACKAGE_NAME
-#cp -rp $RWD/docs $TEMP_DIR/debian/usr/share/$PACKAGE_NAME
-#cp -rp $RWD/images $TEMP_DIR/debian/usr/share/$PACKAGE_NAME
-
  
 echo "$PACKAGE_NAME ($PACKAGE_VERSION) trust; urgency=low" > changelog
 echo "  * Rebuild" >> changelog
 echo " -- Museos Abiertos <admin@museosabiertos.org>  `date -R`" >> changelog
 gzip -9c changelog > $TEMP_DIR/debian/usr/share/doc/$PACKAGE_NAME/changelog.gz
  
-cp logo.png $TEMP_DIR/debian/usr/share/$PACKAGE_NAME/gmme-logo.png
+cp $RWD/logos/MME.png $TEMP_DIR/debian/usr/share/$PACKAGE_NAME
 chmod 0644 $TEMP_DIR/debian/usr/share/$PACKAGE_NAME/*.png
  
 PACKAGE_SIZE=`du -bs $TEMP_DIR/debian | cut -f 1`

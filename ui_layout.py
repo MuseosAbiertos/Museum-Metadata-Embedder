@@ -1,8 +1,24 @@
 # -*- coding: utf-8 -*-
 
 import PySimpleGUI as sg
-import os
+import os, platform, sys
 from pathlib import Path
+
+def get_icon():
+    '''
+    This function adds the program icon to the top-left of the displayed window
+    '''
+    if platform.system() == 'Linux' or platform.system() == 'Darwin':
+        testpyinstaller = getattr(sys, '_MEIPASS', 'NotRunningInPyInstaller')
+        prefix = os.path.realpath('.')
+        if testpyinstaller != 'NotRunningInPyInstaller':
+            prefix = testpyinstaller;
+        wicon = os.path.join(prefix, 'logos', 'MME.png')
+    else: # Windows
+        wicon = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logos', 'MME.ico')
+
+    return wicon
+
 
 def create_and_show_gui():
     folderfileframelayout = [
@@ -34,4 +50,4 @@ def create_and_show_gui():
     ]
 
     # Open the window and return it to main script
-    return sg.Window('MME', layout)
+    return sg.Window('Museum Metadata Embedder', layout, icon=get_icon())
