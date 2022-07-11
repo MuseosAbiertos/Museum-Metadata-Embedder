@@ -1,10 +1,10 @@
 """
-version 0.3
-date 2022-06-10
+version 0.3.1
+date 2022-07-10
 HvdWolf (Surfer63)
 
 ----------
-Use ExifTool, by Phil Harvey to write EXIF metadata on jpgs according to an input CSV and a set of mapping rules according to naming
+Use ExifTool, by Phil Harvey to write XMP, EXIF and IPTC metadata on jpgs according to an input CSV and a set of mapping rules according to naming
 standards: VRAE/ISADG/DC
 
 Usage:
@@ -57,6 +57,7 @@ import subprocess
 import webbrowser
 
 from typing import Optional
+from pathlib import Path
 
 import colorama  # type: ignore
 
@@ -70,6 +71,13 @@ baselogfile = "" # Use it as copy for output_name
 
 SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 colorama.init()
+
+def _get_log_path() -> str:
+    """ Get and create log folder"""
+    log_path = str(Path.home()) + os.path.sep + 'Museum-Metadata-Embedder_logs'
+    if not os.path.isdir(log_path):
+        os.mkdir(log_path)
+    return log_path
 
 
 def _get_current_time() -> str:
@@ -158,7 +166,7 @@ class MME:
         """ Save the error and success logs for the sessions """
         output_name = self.csv_filepath.split('/')[-1].replace('.csv', '')
         window.Element('_baselogfile_').Update(f'_{output_name}-{_get_current_time_for_filename()}.txt')
-        output_name = f'{SCRIPT_PATH}/%s_{output_name}-{_get_current_time_for_filename()}.txt'
+        output_name = f'{_get_log_path()}/%s_{output_name}-{_get_current_time_for_filename()}.txt'
         with open(output_name % 'error_log', 'w', encoding='utf-8') as w_file:
             w_file.write('\n'.join(self.exif_tool_error_log))
         with open(output_name % 'success_log', 'w', encoding='utf-8') as w_file:
@@ -238,8 +246,8 @@ class MME:
 
         # 4 - Write error/success logs
         self._end_status()
-        self._info_msg(f'Writing logs...')
-        window.Element('_sgOutput_').Update(f'Writing logs...\n', append=True)
+        self._info_msg(f'\n\nWriting logs to folder {_get_log_path()} ...')
+        window.Element('_sgOutput_').Update(f'\nWriting logs to folder: {_get_log_path()} ...\n', append=True)
         self._save_logs()
 
         self._info_msg(f'Finished processing {len(self.rows)} with {len(self.exif_tool_error_log)} errors '
@@ -384,12 +392,12 @@ while True:
                 print(ex)
     elif event == '_ViewLogs_':
         if platform.system() == 'Windows':
-            os.startfile(f'{SCRIPT_PATH}/error_log' + values['_baselogfile_'])
-            os.startfile(f'{SCRIPT_PATH}/success_log' + values['_baselogfile_'])
+            os.startfile(f'{_get_log_path()}/error_log' + values['_baselogfile_'])
+            os.startfile(f'{_get_log_path()}/success_log' + values['_baselogfile_'])
         elif platform.system() == 'Darwin':
-            subprocess.call(['open', '-a', 'TextEdit', f'{SCRIPT_PATH}/error_log' + values['_baselogfile_']])
-            subprocess.call(['open', '-a', 'TextEdit', f'{SCRIPT_PATH}/success_log' + values['_baselogfile_']])
+            subprocess.call(['open', '-a', 'TextEdit', f'{_get_log_path()}/error_log' + values['_baselogfile_']])
+            subprocess.call(['open', '-a', 'TextEdit', f'{_get_log_path()}/success_log' + values['_baselogfile_']])
         else:
-            webbrowser.open(f'{SCRIPT_PATH}/error_log' + values['_baselogfile_'])
-            webbrowser.open(f'{SCRIPT_PATH}/success_log' + values['_baselogfile_'])
+            webbrowser.open(f'{_get_log_path()}/error_log' + values['_baselogfile_'])
+            webbrowser.open(f'{_get_log_path()}/success_log' + values['_baselogfile_'])
 window.Close()

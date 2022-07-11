@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Museum-Metadata-Embedder
+Comment=museum-metadata-embedder is a python3/tkinter/pysimplegui Windows/Linux/MacOS graphical frontend for bulk adding exif, xmp and iptc data to images using VRA Core, ISAD-G & Dublin Core standards
+Exec=./gmme
+Icon=/usr/share/museum-metadata-embedder/logo
+Terminal=false
+Type=Application
+Categories=Graphics;Utility;
+StartupNotify=true
