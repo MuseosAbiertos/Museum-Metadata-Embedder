@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+	<id>Museum-Metadata-Embedder</id>
+	<metadata_license>CC-BY-SA-3.0</metadata_license>
+	<project_license>GPL-3.0</project_license>
+	<name>Museum-Metadata-Embedder</name>
+	<summary>Graphic User Interface for bulk adding exif, xmp and iptc data to images using VRA Core, ISAD-G & Dublin Core standards</summary>
+	<description>
+		<p>Museum-Metadata-Embedder is a python3/tkinter/pysimplegui Windows/Linux/MacOS graphical frontend for bulk adding exif, xmp and iptc data to images using VRA Core, ISAD-G & Dublin Core standards</p>
+	</description>
+	<launchable type="desktop-id">museum-metadata-embedder.desktop</launchable>
+	<url type="homepage">https://github.com/MuseosAbiertos/mme</url>
+	<screenshots>
+		<screenshot type="default">
+			<image>https://github.com/MuseosAbiertos/mme/mme-main.jpg</image>
+		</screenshot>
+	</screenshots>
+	<provides>
+		<id>museum-metadata-embedder.desktop</id>
+	</provides>
+</component>

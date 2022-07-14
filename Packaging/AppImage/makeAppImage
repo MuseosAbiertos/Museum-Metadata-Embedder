@@ -1,0 +1,128 @@
+#!/bin/bash
+
+# Script to make a universal appimage for gmme
+# version 0.1, 2022-07-10, hvdw
+
+# Requirements:
+# appimagetool: Download from https://github.com/AppImage/AppImageKit/releases
+# Necessary python3 modules
+
+
+if [ "$1" = "" ]
+then
+        printf "\n\nYou have to provide the version\n\n"
+        exit
+fi
+
+VER="$1"
+WORKDIR=$(pwd)
+printf "\n\nWorkdir = $WORKDIR\n\n"
+
+printf "\n\nGo back to root folder of souce code\n"
+cd ../..
+ROOTDIR=$(pwd)
+
+printf "\nRemove possible previous build and dist folders and recreate binary\n\n"
+rm -rf dist build *.spec
+pyinstaller --icon "${ROOTDIR}/logos/MME.png" --add-data "${ROOTDIR}/logos/*:./logos" gmme.py
+
+
+printf "\n\nMove back to our AppImage folder\n\n"
+cd $WORKDIR
+#
+printf "Remove, create and step into our AppDir\n\n"
+#
+arch=$(uname -m)
+if [ "$arch" == 'x86_64' ];
+then 
+    AppDir="Museum-Metadata-Embedder-x86_64"
+fi
+if [[ $arch =~ ^arm ]];
+then
+    AppDir="Museum-Metadata-Embedder-armhf"
+fi
+rm -rf ${AppDir}
+mkdir -p ${AppDir}
+cd ${AppDir}
+
+#
+printf "copy the gmme pyinstaller binary into this AppDir folder\n\n"
+#
+cp -r $ROOTDIR/dist/gmme/* .
+
+#
+printf "Create folders and copy program icon and desktop file\n\n"
+#
+mkdir -p usr/bin
+mkdir -p usr/share/museum-metadata-embedder
+mkdir -p usr/share/applications
+mkdir -p usr/share/metainfo
+
+cp $ROOTDIR/logos/MME.png usr/share/museum-metadata-embedder
+cp $ROOTDIR/logos/MME.png .
+cp -r $ROOTDIR/logos .
+cp -r $ROOTDIR/data .
+
+cp -r $ROOTDIR/exiftool/Image-ExifTool-12.41/* usr/bin
+chmod +x usr/bin/exiftool
+cp $WORKDIR/museum-metadata-embedder.desktop usr/share/applications
+cp $WORKDIR/museum-metadata-embedder.desktop .
+cp $WORKDIR/museum-metadata-embedder.appdata.xml usr/share/metainfo
+
+
+printf "\n\nNow copy license into our AppImage\n\n"
+
+cp -r $ROOTDIR/LICENSE .
+
+#
+printf "Create the AppRun script\n\n"
+#
+#cd usr/bin
+cat > ./AppRun <<\EOF
+#!/bin/sh
+HERE=$(dirname $(readlink -f "${0}"))
+export PATH="$APPDIR:$APPDIR/usr/bin:${HERE}/usr/local/bin:${HERE}/usr/bin:$PATH"
+"${HERE}"/gmme ${1+"$@"} &
+EOF
+
+chmod a+x ./AppRun
+
+#
+# We're done in the AppDir
+cd ..
+#rm ${AppDir}/${latest_exif}
+
+#
+# Create the AppImage
+#
+arch=$(uname -m)
+printf "\nBuilding for machine/architecture: $arch\n"
+if [ "$arch" == 'x86_64' ];
+then 
+    wget -c https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-x86_64.AppImage
+    chmod +x appimagetool-x86_64.AppImage
+    ARCH=x86_64 ./appimagetool-x86_64.AppImage -n ${AppDir}
+fi
+if [[ $arch =~ ^arm ]];
+then
+    wget -c https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-armhf.AppImage
+    chmod +x appimagetool-armhf.AppImage
+    ARCH=armv71 ./appimagetool-armhf.AppImage -n ${AppDir}
+fi
+
+
+#
+# Rename the created app image and zip it
+#
+if [ "$arch" == 'x86_64' ];
+then 
+    mv Museum-Metadata-Embedder-x86_64.AppImage Museum-Metadata-Embedder-${VER}-x86_64.AppImage
+    cp -r $ROOTDIR/LICENSE .
+    zip Museum-Metadata-Embedder-${VER}-x86_64.AppImage.zip Museum-Metadata-Embedder-${VER}-x86_64.AppImage LICENSE
+fi
+if [[ $arch =~ ^arm ]];
+then
+    mv Museum-Metadata-Embedder-armhf.AppImage Museum-Metadata-Embedder-${VER}-armhf.AppImage
+    cp -r $ROOTDIR/LICENSE .
+    zip Museum-Metadata-Embedder-${VER}-armhf.AppImage.zip Museum-Metadata-Embedder-${VER}-armhf.AppImage LICENSE
+fi
