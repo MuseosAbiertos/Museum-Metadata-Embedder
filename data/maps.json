@@ -3,7 +3,7 @@
         "Admin Cataloguer": "xmp-photoshop:CaptionWriter",
         "Admin Collection": "xmp-dc:Publisher",
         "Admin Job ID": "xmp-photoshop:TransmissionReference",
-        "Collection Refid": "xmp-vrae:CollectionId",
+        "Collection Refid": "xmp-vrae:CollectionRefid",
         "Image Agent": "xmp:Creator",
         "Image Date": "IPTC:DateCreated",
         "Image Description": "xmp-vrae:ImageDescription",
