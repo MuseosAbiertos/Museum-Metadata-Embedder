@@ -42,9 +42,11 @@ https://docs.museosabiertos.org/museum-metadata-embedder
 
 
 ## Agradecimientos
-* **Harry van der Wolf**, por su inestimable colaboración y la creación de la interfaz gráfica (GUI) y sus ejecutables multiplataforma
-* **Greg Reser**, por todo su apoyo y colaboración en esta implementación de VRA Core
-* **Phil Harvey**, por su maravilloso ExifTool, que pronto cumplirá 30 años!
+* **Harry van der Wolf**, por su apoyo, colaboración y la creación de la interfaz gráfica (GUI)
+* **Greg Reser**, por su apoyo y colaboración en esta implementación de VRA Core
+* **Phil Harvey**, por su maravilloso ExifTool (pronto a cumplir 30 años)
+* **Patricia Harpring** (Getty Vocabulary Program)
+* **Robin Johnson** (Getty Vocabulary Program)
 * **Jairo Serrano**, amigo y estimado SysOp que logra que todo funcione sin romperse y lo repara cuando se rompe
 * **Sebastián Gersbach**, por el diseño del logo y el paquete de iconos
 * **Centro de Documentación de Bienes Patrimoniales de Chile** [https://www.aatespanol.cl/]
