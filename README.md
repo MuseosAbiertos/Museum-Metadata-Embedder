@@ -2,7 +2,7 @@
 
 # Museum Metadata Embedder (MME)
 
-Embed (write) metadata -[Dublin Core](https://dublincore.org/specifications/dublin-core/), [VRA Core](https://core.vraweb.org/), [XMP](https://www.adobe.com/products/xmp.html), [ISAD(G)](https://www.ica.org/sites/default/files/CBPS_2000_Guidelines_ISAD(G)_Second-edition_EN.pdf), [IPTC](https://iptc.org/standards/photo-metadata/), [EXIF](https://docs.fileformat.com/image/exif/), into all types of images and PDF files from a normalized CSV.
+Embed (write) metadata -[Dublin Core](https://dublincore.org/specifications/dublin-core/), [VRA Core](https://core.vraweb.org/), [XMP](https://www.adobe.com/products/xmp.html), [ISAD(G)](https://www.ica.org/sites/default/files/CBPS_2000_Guidelines_ISAD(G)_Second-edition_EN.pdf), [IPTC](https://iptc.org/standards/photo-metadata/), [EXIF](https://docs.fileformat.com/image/exif/)- into all types of images and PDF files from a normalized CSV.
 
 **MME** is a Python 3 command line application, which uses [ExifTool](https://exiftool.org/) (de Phil Harvey) and also has a graphical interface, runnable on Linux, MacOS and Windows.
 
