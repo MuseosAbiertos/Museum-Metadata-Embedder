@@ -4,7 +4,7 @@
 
 Embed (write) metadata -[Dublin Core](https://dublincore.org/specifications/dublin-core/), [VRA Core](https://core.vraweb.org/), [XMP](https://www.adobe.com/products/xmp.html), [ISAD(G)](https://www.ica.org/sites/default/files/CBPS_2000_Guidelines_ISAD(G)_Second-edition_EN.pdf), [IPTC](https://iptc.org/standards/photo-metadata/), [EXIF](https://docs.fileformat.com/image/exif/)- into all types of images and PDF files from a normalized CSV.
 
-**MME** is a Python 3 command line application, which uses [ExifTool](https://exiftool.org/) (de Phil Harvey) and also has a graphical interface, runnable on Linux, MacOS and Windows.
+**MME** is a Python 3 command line application, which uses [ExifTool](https://exiftool.org/) (by Phil Harvey) and also has a graphical interface, (**GMME**) runnable on Linux, MacOS and Windows.
 
 
 ## Use
@@ -31,6 +31,20 @@ python3 mme.py csv/test.csv images/
 -m MAX_DEPTH (--max-depth MAX_DEPTH)
     Maximum depth of subfolders to search for JPGS. 3 by default.
 
+### Extract metadata
+To extract metadata from an image you must use ExifTool, which is provided in this repository
+
+Example:
+
+a. to extract VRA Core metadata: 
+```s
+exiftool -xmp-vrae:all image.tif
+```
+b. to extract all metadata:
+```s
+exiftool -a -G1 -s image.tif
+```
+
 ### GMME (GUI)
 gmme' is the graphical version of mme.py. It is a python3 script (only). It does not accept arguments.
 
@@ -38,7 +52,6 @@ Use:
 ```s
 python3 gmme.py &
 ```
-
 
 ## Manual
 ### English
