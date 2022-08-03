@@ -12,7 +12,6 @@
   - Download and place in the same directory as the "mme" folder
 
 - Python 3 https://www.python.org/downloads/
-  - [I got an error after installing from https://www.python.org/downloads/
 
 - colorama https://pypi.org/project/colorama/
   - Command line: <code>pip install colorama</code>
@@ -33,7 +32,6 @@
   - Command line: <code>brew install perl</code>
 
 - **Python 3** https://www.python.org/downloads/
-  - [I got an error after installing from https://www.python.org/downloads/
 
 - **colorama** https://pypi.org/project/colorama/
   - Command line: <code>pip install colorama</code>
