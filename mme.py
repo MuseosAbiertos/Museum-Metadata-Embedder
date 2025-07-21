@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 version 0.2
 date 2022-06-10
